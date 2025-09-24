@@ -1,0 +1,70 @@
+Employee Management System – Description
+
+FUNCTIONALITY:
+            A simple command-line application built with Node.js and the readline module.
+            It allows users to manage employees by adding new employees, listing all employees, and removing employees by their ID.
+
+COMPONENTS BREAKDOWN
+ELEMENT 1: Readline Interface
+            Purpose: Enables interaction with the user through the command line.
+            Properties: Uses standard input and output from the terminal.
+            Effect: Allows the program to ask questions and receive user input.
+
+ELEMENT 2: Employees Data Store
+            Purpose: Holds the list of employees in memory.
+            Properties: Employees are stored in an array, where each employee has a name and an ID.
+            Effect: Keeps track of employee information while the program is running.
+
+ELEMENT 3: Main Menu
+            Purpose: Provides options for the user to interact with the system.
+Options:
+            Add Employee
+            List Employees
+            Remove Employee
+            Exit
+
+            Effect: Based on the user’s choice, the program runs the corresponding function.
+
+ELEMENT 4: Add Employee
+            Purpose: Collects employee details (name and ID) from the user.
+            Process: Prompts the user for name and ID → Stores the new employee in the array.
+            Effect: A confirmation message is displayed after adding.
+
+ELEMENT 5: List Employees
+            Purpose: Displays all employees currently stored.
+            Process: If the list is empty, a message is shown. Otherwise, each employee is listed with their name and ID.
+            E            ffect: Allows the user to see the current employee database.
+
+ELEMENT 6: Remove Employee
+            Purpose: Deletes an employee by ID.
+            Process: User enters an ID → The system searches for it → If found, the employee is removed and a success message is shown. If not found, an error message is displayed.
+            Effect: Keeps the employee list updated by removing unwanted records.
+
+ELEMENT 7: Exit Option
+            Purpose: Ends the program safely.
+            Effect: Closes the readline interface and prints a goodbye message.
+
+PROCESS FLOW:
+            Program starts and shows the main menu.
+            User selects an option.
+            The chosen function (Add, List, Remove, Exit) runs.
+            After completing an action, the menu is displayed again until the user exits.
+
+TEST CASES:
+            Choosing Add Employee and entering details → Employee is added successfully.
+            Choosing List Employees after adding → Shows all employees.
+            Choosing Remove Employee with a valid ID → Employee is removed and confirmation is shown.
+            Choosing Remove Employee with an invalid ID → Error message displayed.
+            Choosing List Employees with no data → Message “No employees found” appears.
+            Choosing Exit → Program ends with “Goodbye” message.
+
+EXPECTED BEHAVIOR:
+            Employee records are stored only during program execution (in memory).
+            User-friendly messages appear for each action.
+            The menu keeps reappearing until the user exits.
+
+LEARNING OUTCOMES:
+            Using Node.js readline for command-line interaction.
+            Implementing menu-driven programs.
+            Working with arrays to store, search, and delete data dynamically.
+            Practicing input validation and user-friendly error handling.

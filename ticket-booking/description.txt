@@ -1,0 +1,82 @@
+Seat Booking System – Description
+FUNCTIONALITY:
+A simple RESTful API built with Node.js and Express that manages seat reservations.
+Users can view available seats, temporarily lock a seat, and confirm a booking.
+Seats automatically unlock after one minute if not confirmed.
+
+COMPONENTS BREAKDOWN
+ELEMENT 1: Express App Initialization
+Purpose: Starts the Express application.
+Properties: Uses JSON middleware to handle requests in JSON format.
+Effect: Prepares the server to process API requests.
+
+ELEMENT 2: Seats Data Store
+Purpose: Holds the seat information in memory.
+Properties: Each seat has an ID and a status. Status values include:
+
+available → seat can be locked or booked
+
+locked → seat is held temporarily before confirmation
+
+booked → seat is confirmed and no longer available
+
+Effect: Manages seat availability dynamically.
+
+ELEMENT 3: Locks Data Store
+Purpose: Keeps track of seats that are temporarily locked.
+Properties: Uses timeouts to automatically release seats after one minute if not confirmed.
+Effect: Ensures fair booking by preventing permanent seat blocking without confirmation.
+
+ELEMENT 4: API Routes
+
+GET /seats
+Purpose: Retrieve the list of all seats with their current status.
+Effect: Allows users to see which seats are available, locked, or booked.
+
+POST /lock/:id
+Purpose: Lock a specific seat temporarily.
+Logic:
+If seat does not exist → return “Seat not found.”
+If seat is not available → return error.
+If already locked → return error.
+Otherwise → change status to locked and set a one-minute timeout to release it automatically.
+Effect: Prevents others from booking the same seat while it is locked.
+
+POST /confirm/:id
+Purpose: Confirm a locked seat and change its status to booked.
+Logic:
+If seat does not exist → return “Seat not found.”
+If seat is not locked → return error.
+If locked → confirm booking, cancel the timeout, and mark seat as booked.
+Effect: Finalizes the booking so the seat cannot be reserved again.
+
+ELEMENT 5: Server Setup
+Purpose: Starts the API server.
+Properties: Runs on port 3000.
+Effect: Makes the system available at http://localhost:3000.
+
+PROCESS FLOW:
+User checks seat availability.
+User locks a seat → Seat is held for 1 minute.
+User confirms the seat → Seat becomes permanently booked.
+If user does not confirm within 1 minute → Seat automatically returns to available.
+
+TEST CASES:
+Requesting GET /seats → Returns all seats with status.
+Locking an available seat → Seat status changes to locked.
+Locking an already locked or booked seat → Error message is returned.
+Confirming a locked seat within 1 minute → Seat becomes booked.
+Confirming a seat that is not locked → Error message is returned.
+Locking a seat and waiting more than 1 minute → Seat becomes available again.
+
+EXPECTED BEHAVIOR:
+Seats are managed fairly: no double booking, no indefinite locking.
+Users must confirm bookings within 1 minute, or the seat is released.
+Correct status codes are returned for success or error cases.
+
+LEARNING OUTCOMES:
+Building a seat reservation system with Express.
+Implementing temporary locks using timeouts.
+Managing state transitions: available → locked → booked.
+Preventing race conditions in booking systems.
+Handling errors with proper status responses.

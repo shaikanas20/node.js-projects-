@@ -1,0 +1,67 @@
+Card Management API – Description
+
+FUNCTIONALITY:
+          A simple RESTful API built with Node.js and Express that allows users to manage a collection of playing cards.
+          Users can view all cards, fetch a specific card by ID, add a new card, or delete an existing card.
+
+COMPONENTS BREAKDOWN
+ELEMENT 1: Express App Initialization
+          Purpose: Starts the Express application.
+          Properties: Uses JSON middleware so the server can understand JSON request bodies.
+          Effect: Prepares the app to handle API requests in JSON format.
+
+ELEMENT 2: In-Memory Data Store
+          Purpose: Holds the card collection in memory.
+          Properties: Each card has three attributes – an ID (unique number), a suit (such as Hearts, Spades, Diamonds, Clubs), and a value (such as Ace, King, Queen).
+          An additional counter is used to assign unique IDs for newly created cards.
+          Effect: Provides initial data for testing and updating through the API.
+
+ELEMENT 3: API Routes
+          GET all cards
+          Purpose: Retrieve the full list of stored cards.
+          Effect: Returns all card objects in JSON format.
+
+          GET a specific card by ID
+          Purpose: Retrieve details of a card using its ID.
+          Effect: Returns the card if it exists, otherwise shows an error message with status 404.
+
+          POST (add a new card)
+          Purpose: Add a new card to the collection.
+          Validation: Both suit and value must be provided.
+          Effect: Creates a card with a unique ID, stores it, and returns it with a success status of 201.
+
+          DELETE a card by ID
+          Purpose: Remove a specific card using its ID.
+          Effect: Deletes the card if found and returns a confirmation message. If the card does not exist, returns a 404 error.
+
+ELEMENT 4: Server Setup
+           Purpose: Starts the server and makes the API accessible.
+           Properties: The server runs on port 3000.
+           Effect: The API becomes available at the address http://localhost:3000.
+
+PROCESS FLOW:
+           A client sends a request (GET, POST, or DELETE).
+           The Express server checks the request route.
+           The server processes the request using the in-memory card collection.
+           A JSON response is returned with data or an error message.
+
+TEST CASES:
+          Requesting all cards → Returns the full collection.
+          Requesting a card with a valid ID → Returns that card’s details.
+          Requesting a card with an invalid ID → Returns “Card not found” with a 404 status.
+          Adding a new card with both suit and value → Successfully stores and returns the new card.
+          Adding a card without required fields → Returns a 400 error.
+          Deleting a card with a valid ID → Removes the card and confirms deletion.
+          Deleting a card with an invalid ID → Returns “Card not found” with a 404 status.
+
+EXPECTED BEHAVIOR:
+          All responses are in JSON format.
+          Correct status codes are returned for success (200, 201) or errors (400, 404).
+          Multiple cards can be added or removed dynamically while the server is running.
+
+LEARNING OUTCOMES:
+          Understanding how to set up an Express server.
+          Applying REST principles for CRUD (Create, Read, Delete) operations.
+          Working with request parameters (ID) and JSON request bodies.
+          Handling errors and validations effectively.
+          Managing data temporarily in memory.
